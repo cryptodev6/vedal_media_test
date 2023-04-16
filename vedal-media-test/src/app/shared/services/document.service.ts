@@ -5,12 +5,12 @@ import { Observable, of } from 'rxjs';
   providedIn: 'root'
 })
 export class DocumentService {
-  private documentFolder = 'assets/documents'; // Replace with the actual folder name where the document is stored
+  private documentFolder = 'assets/documents'; 
 
   constructor() { }
 
   getDocument(id: string): Observable<any> {
-    const filename = `${id}.pdf`; // Replace with the actual filename of the document
+    const filename = `${id}.pdf`;
     const filepath = `${this.documentFolder}/${filename}`;
     return of(filepath);
   }
