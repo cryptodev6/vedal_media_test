@@ -5,13 +5,11 @@ import { Observable, of } from 'rxjs';
   providedIn: 'root'
 })
 export class DocumentService {
-  private documentFolder = 'assets/documents'; 
+  private document: string = 'data:image/png;base64,iVBORw0KG...'; // Replace with your PNG data
 
   constructor() { }
 
-  getDocument(id: string): Observable<any> {
-    const filename = `${id}.pdf`;
-    const filepath = `${this.documentFolder}/${filename}`;
-    return of(filepath);
+  getDocument(): Observable<string> {
+    return of(this.document);
   }
 }

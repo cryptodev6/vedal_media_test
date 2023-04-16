@@ -15,9 +15,8 @@ export class DocumentViewerComponent implements OnInit {
   constructor(private documentService: DocumentService) { }
 
   ngOnInit(): void {
-    const documentId = '1';
-    this.documentService.getDocument(documentId).subscribe(filepath => {
-      this.document = filepath;
+    this.documentService.getDocument().subscribe(imageData => {
+      this.document = imageData;
     });
   }
 

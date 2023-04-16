@@ -1,17 +1,19 @@
-<iframe [src]="document" [style.transform]="'scale(' + zoomLevel + ')'"></iframe>
-
-<div class="zoom-controls">
-  <button (click)="zoomIn()">+</button>
-  <button (click)="zoomOut()">-</button>
-</div>
-
-<div class="annotation" *ngFor="let annotation of annotations" [style.left]="annotation.x + 'px'" [style.top]="annotation.y + 'px'" (click)="selectAnnotation(annotation)" (mousedown)="selectAnnotation(annotation)" (mousemove)="moveAnnotation($event)">
-  <div class="annotation-content">
-    {{ annotation.content }}
+<div class="document-viewer">
+  <div class="document-container">
+    <img [src]="document" [style.zoom]="zoomLevel" (click)="addAnnotation($event)"
+         (mousedown)="selectAnnotation(null)" (mouseup)="selectedAnnotation=null"
+         (mousemove)="moveAnnotation($event)" />
+    <div *ngFor="let annotation of annotations"
+         class="annotation"
+         [style.left.px]="annotation.x" [style.top.px]="annotation.y"
+         (click)="selectAnnotation(annotation)"
+         (mousedown)="$event.stopPropagation()" (mouseup)="$event.stopPropagation()">
+      {{ annotation.content }}
+    </div>
   </div>
-  <div class="annotation-controls">
-    <button (click)="deleteAnnotation()">Delete</button>
+  <div class="toolbar">
+    <button (click)="zoomIn()">+</button>
+    <button (click)="zoomOut()">-</button>
+    <button (click)="saveAnnotations()">Save</button>
   </div>
 </div>
-
-<button (click)="saveAnnotations()">Save Annotations</button>
