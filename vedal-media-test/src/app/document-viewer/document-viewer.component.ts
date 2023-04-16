@@ -4,7 +4,7 @@ import { DocumentService } from '../shared/services/document.service';
 @Component({
   selector: 'app-document-viewer',
   templateUrl: './document-viewer.component.html',
-  styleUrls: ['./document-viewer.component.css']
+  styleUrls: ['./document-viewer.component.scss']
 })
 export class DocumentViewerComponent implements OnInit {
   document: string = '';
