@@ -1,0 +1,26 @@
+https://drive.google.com/file/d/1mA0ljP17feuYxKWdSVpRFKTzJwR-u189/view?usp=share_link
+
+Test task
+Need to create an application to view documents and add annotations on it.
+Details
+
+	1. User opens doc by link with id of the document
+	2. The document downloaded from the server with pagination and scrolling is displayed
+	to the user (the server is a mock-up, the json document format is arbitrary, the pages
+	are linked)
+	3. The document zoom is available to the user (+/-)
+	4. The user can add an annotation (picture or inscription) to any page of the document
+	5. For the added annotation, the following options are available: moving and deleting
+	6. The save result button is available to the user. After saving, the application goes to another page and outputs json with the parameters of the added annotations (page,
+	coordinates, size, content). To save time you can output the result to the console
+	instead of creating a new page.
+
+Nice to have
+	1. Unit / e2e tests
+	2. Extensible architecture (application state, adding other types of annotations)
+	3. Resizing, rotation, opacity change for annotations
+Expected result
+	1. Source code on Github
+	2. Screenshots of the project
+	3. Readme with a description of the project in free form - a general approach, pros and
+	cons of implementation, known issues and solutions.
