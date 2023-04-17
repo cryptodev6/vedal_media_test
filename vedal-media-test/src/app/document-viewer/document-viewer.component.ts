@@ -11,7 +11,9 @@ export class DocumentViewerComponent implements OnInit {
   isPopupOpen = false;
   isPicturePopupOpen = false;
   isInscriptionPopupOpen = false;
-  annotations: { x: number, y: number, text: string }[] = [];
+  annotations: { x: number, y: number, text: string, file?: File }[] = [];
+  file: any = '';
+  positionBeforePopupClosed: { x: number, y: number } = { x: 0, y: 0 };
 
   constructor(private route: ActivatedRoute) {}
 
@@ -38,6 +40,7 @@ export class DocumentViewerComponent implements OnInit {
   }
 
   showPicturePopup() {
+    this.positionBeforePopupClosed = { ...this.position };
     this.isPopupOpen = false;
     this.isPicturePopupOpen = true;
   }
@@ -57,11 +60,29 @@ export class DocumentViewerComponent implements OnInit {
     this.isInscriptionPopupOpen = false;
   }
 
-  closePopup() {
+  closePopup(file?: File) {
     this.isPopupOpen = false;
     this.isPicturePopupOpen = false;
     this.isInscriptionPopupOpen = false;
+    
+    if (!!this.file && !!file) {
+      const annotation = {
+        x: this.positionBeforePopupClosed.x,
+        y: this.positionBeforePopupClosed.y,
+        text: file.name,
+        file: file
+      };
+      this.annotations.push(annotation);
+    }
+    
+    this.file = undefined;
   }
+
+  onFileSelected(event: any) {
+    this.file = event.target.files[0];
+    this.closePopup(this.file);
+  }
+
 
   zoomIn() {
     const currentZoom = parseFloat(getComputedStyle(document.body).getPropertyValue('zoom'));
