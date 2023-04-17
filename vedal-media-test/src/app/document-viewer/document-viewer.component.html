@@ -31,3 +31,5 @@
 <div class="popup" *ngIf="isInscriptionPopupOpen" [style.left.px]="position.x" [style.top.px]="position.y">
   <input #annotationInput (keyup.enter)="addAnnotation(annotationInput.value)">
 </div>
+<img *ngIf="selectedImageFile" [src]="selectedImageFile" alt="Selected Image" width="300" height="300" style="background-color: yellow; padding: 10px;">
+

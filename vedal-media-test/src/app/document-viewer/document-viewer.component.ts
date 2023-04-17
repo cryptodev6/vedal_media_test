@@ -14,6 +14,7 @@ export class DocumentViewerComponent implements OnInit {
   annotations: { x: number, y: number, text: string, file?: File }[] = [];
   file: any = '';
   positionBeforePopupClosed: { x: number, y: number } = { x: 0, y: 0 };
+  selectedImageFile: any;
 
   constructor(private route: ActivatedRoute) {}
 
@@ -64,8 +65,8 @@ export class DocumentViewerComponent implements OnInit {
     this.isPopupOpen = false;
     this.isPicturePopupOpen = false;
     this.isInscriptionPopupOpen = false;
-    
-    if (!!this.file && !!file) {
+
+    if (file) {
       const annotation = {
         x: this.positionBeforePopupClosed.x,
         y: this.positionBeforePopupClosed.y,
@@ -73,9 +74,17 @@ export class DocumentViewerComponent implements OnInit {
         file: file
       };
       this.annotations.push(annotation);
+
+      // Set the selected image file to the selected file
+      this.selectedImageFile = file;
+
+      // Read the contents of the file and convert it to a data URL
+      const reader = new FileReader();
+      reader.onload = (event: ProgressEvent<FileReader>) => {
+        this.selectedImageFile = event?.target?.result as string;
+      };
+      reader.readAsDataURL(file);
     }
-    
-    this.file = undefined;
   }
 
   onFileSelected(event: any) {
