@@ -8,7 +8,6 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./document-viewer.component.scss']
 })
 export class DocumentViewerComponent implements OnInit {
-
   constructor(private route: ActivatedRoute) {
     this.route.params.subscribe(params => {
       console.log(params['id']);
@@ -18,4 +17,17 @@ export class DocumentViewerComponent implements OnInit {
   ngOnInit(): void {
 
   }
+
+  zoomIn() {
+    const currentZoom = parseFloat(getComputedStyle(document.body).getPropertyValue('zoom'));
+    document.body.style.setProperty('zoom', `${currentZoom + 0.1}`);
+  }
+
+  zoomOut() {
+    const currentZoom = parseFloat(getComputedStyle(document.body).getPropertyValue('zoom'));
+    if (currentZoom > 0.1) {
+      document.body.style.setProperty('zoom', `${currentZoom - 0.1}`);
+    }
+  }
+
 }
