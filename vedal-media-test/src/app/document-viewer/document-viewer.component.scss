@@ -9,6 +9,18 @@ body {
   margin: 0 auto;
 }
 
+.title {
+  position: fixed;
+  width: 100%;
+  top: 0px;
+  left: 0px;
+  background-color: green;
+  height: 30px;
+  padding-left: 20px;
+  padding-top: 20px;
+  color: #FFF;
+}
+
 /* set page background color, border and box-shadow */
 .page {
   background-color: #fff;
@@ -129,4 +141,20 @@ button:hover {
 
 .zoom-buttons button:hover {
   background-color: #ddd;
+}
+
+.document {
+  position: relative;
+  img {
+    max-width: 100%;
+  }
+}
+.annotation {
+  position: absolute;
+  background-color: yellow;
+  padding: 5px;
+  & img {
+    max-width: 100%;
+    height: auto;
+  }
 }

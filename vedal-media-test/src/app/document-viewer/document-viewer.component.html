@@ -1,8 +1,9 @@
 <button id="plus-button" (click)="zoomIn()">+</button>
 <button id="negative-button" (click)="zoomOut()">-</button>
-
+<div class="title">
+	Test Doc
+</div>
 <div class="container">
-  <h1>Test doc</h1>
   <div class="page" *ngFor="let page of [1, 2, 3, 4, 5]">
     <img src="assets/documents/{{ page }}.png" alt="Page {{ page }}" />
     <div class="page-number">Page {{ page }}</div>
