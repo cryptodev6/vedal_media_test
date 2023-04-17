@@ -22,7 +22,9 @@
 <div class="popup" *ngIf="isPicturePopupOpen" [style.left.px]="position.x" [style.top.px]="position.y">
   <div class="popup-header">
     <div class="container-buttons">
-      <div class="picture button">Picture popup</div>
+      <div class="picture button">
+      	<input type="file" id="picture-file">
+      </div>
     </div>
   </div>
 </div>
