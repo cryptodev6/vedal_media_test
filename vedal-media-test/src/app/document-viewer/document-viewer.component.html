@@ -1,19 +1,4 @@
-<div class="document-viewer">
-  <div class="document-container">
-    <img [src]="document" [style.zoom]="zoomLevel" (click)="addAnnotation($event)"
-         (mousedown)="selectAnnotation(null)" (mouseup)="selectedAnnotation=null"
-         (mousemove)="moveAnnotation($event)" />
-    <div *ngFor="let annotation of annotations"
-         class="annotation"
-         [style.left.px]="annotation.x" [style.top.px]="annotation.y"
-         (click)="selectAnnotation(annotation)"
-         (mousedown)="$event.stopPropagation()" (mouseup)="$event.stopPropagation()">
-      {{ annotation.content }}
-    </div>
-  </div>
-  <div class="toolbar">
-    <button (click)="zoomIn()">+</button>
-    <button (click)="zoomOut()">-</button>
-    <button (click)="saveAnnotations()">Save</button>
-  </div>
+<h1>Test doc</h1>
+<div *ngFor="let i of [1, 2, 3, 4, 5]">
+  <img src="assets/documents/{{ i }}.png" alt="Page {{ i }}" />
 </div>
