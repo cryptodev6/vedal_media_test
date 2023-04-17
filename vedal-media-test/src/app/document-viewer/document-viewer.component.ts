@@ -1,5 +1,4 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { DocumentService } from '../shared/services/document.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -10,6 +9,9 @@ import { ActivatedRoute } from '@angular/router';
 export class DocumentViewerComponent implements OnInit {
   position: { x: number, y: number } = { x: 0, y: 0 };
   isPopupOpen = false;
+  isPicturePopupOpen = false;
+  isInscriptionPopupOpen = false;
+  annotations: { x: number, y: number, text: string }[] = [];
 
   constructor(private route: ActivatedRoute) {}
 
@@ -28,15 +30,37 @@ export class DocumentViewerComponent implements OnInit {
   }
 
   showPopup(event: MouseEvent) {
-    console.log("show popup", event);
     this.position.x = event.clientX;
     this.position.y = event.clientY;
     this.isPopupOpen = true;
-    console.log("isPopupOpen", this.isPopupOpen);
+    this.isPicturePopupOpen = false;
+    this.isInscriptionPopupOpen = false;
+  }
+
+  showPicturePopup() {
+    this.isPopupOpen = false;
+    this.isPicturePopupOpen = true;
+  }
+
+  showInscriptionPopup() {
+    this.isPopupOpen = false;
+    this.isInscriptionPopupOpen = true;
+  }
+
+  addAnnotation(text: string) {
+    const annotation = {
+      x: this.position.x,
+      y: this.position.y,
+      text: text
+    };
+    this.annotations.push(annotation);
+    this.isInscriptionPopupOpen = false;
   }
 
   closePopup() {
     this.isPopupOpen = false;
+    this.isPicturePopupOpen = false;
+    this.isInscriptionPopupOpen = false;
   }
 
   zoomIn() {

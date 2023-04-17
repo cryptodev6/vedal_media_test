@@ -5,15 +5,27 @@
   <div class="page" *ngFor="let page of [1, 2, 3, 4, 5]">
     <img src="assets/documents/{{ page }}.png" alt="Page {{ page }}" />
     <div class="page-number">Page {{ page }}</div>
-  </div>
-</div>
-isPopupOpen: {{isPopupOpen}}
-<div class="popup" *ngIf="isPopupOpen" [style.left.px]="position.x" [style.top.px]="position.y">
-  <div class="popup-header">
-    <div class="container-buttons">
-    	<div class="picture button">Picture</div>
-    	<div class="inscription button">Inscription</div>
+    <div class="annotation" *ngFor="let annotation of annotations"
+         [style.left.px]="annotation.x" [style.top.px]="annotation.y">
+      {{ annotation.text }}
     </div>
   </div>
 </div>
-
+<div class="popup" *ngIf="isPopupOpen" [style.left.px]="position.x" [style.top.px]="position.y">
+  <div class="popup-header">
+    <div class="container-buttons">
+      <div class="picture button" (click)="showPicturePopup()">Picture</div>
+      <div class="inscription button" (click)="showInscriptionPopup()">Inscription</div>
+    </div>
+  </div>
+</div>
+<div class="popup" *ngIf="isPicturePopupOpen" [style.left.px]="position.x" [style.top.px]="position.y">
+  <div class="popup-header">
+    <div class="container-buttons">
+      <div class="picture button">Picture popup</div>
+    </div>
+  </div>
+</div>
+<div class="popup" *ngIf="isInscriptionPopupOpen" [style.left.px]="position.x" [style.top.px]="position.y">
+  <input #annotationInput (keyup.enter)="addAnnotation(annotationInput.value)">
+</div>
