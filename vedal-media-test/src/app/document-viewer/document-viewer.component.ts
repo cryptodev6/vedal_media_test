@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -11,26 +11,15 @@ export class DocumentViewerComponent implements OnInit {
   isPopupOpen = false;
   isPicturePopupOpen = false;
   isInscriptionPopupOpen = false;
-  annotations: { x: number, y: number, text: string, file?: File }[] = [];
+  annotations: { id: number, x: number, y: number, text: string, file?: File }[] = [];
   file: any = '';
   positionBeforePopupClosed: { x: number, y: number } = { x: 0, y: 0 };
   selectedImageFile: any;
+  nextId = 1;
 
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {}
-
-  @HostListener('document:click', ['$event'])
-  onDocumentClick(event: MouseEvent) {
-    /*if (this.isPopupOpen) {
-      const popup = document.querySelector('.popup') as HTMLElement;
-      const isClickInsidePopup = popup.contains(event.target as Node);
-
-      if (!isClickInsidePopup) {
-        this.closePopup();
-      }
-    }*/
-  }
 
   showPopup(event: MouseEvent) {
     this.position.x = event.clientX;
@@ -53,12 +42,30 @@ export class DocumentViewerComponent implements OnInit {
 
   addAnnotation(text: string) {
     const annotation = {
+      id: this.nextId++,
       x: this.position.x,
       y: this.position.y,
       text: text
     };
     this.annotations.push(annotation);
     this.isInscriptionPopupOpen = false;
+  }
+
+  onAnnotationDragEnd(annotation: any, event: any) {
+    const newX = event.clientX;
+    const newY = event.clientY;
+    const index = this.annotations.findIndex(a => a.id === annotation.id);
+    if (index !== -1) {
+      this.annotations[index].x = newX;
+      this.annotations[index].y = newY;
+    }
+  }
+
+  removeAnnotation(annotation: any) {
+    const index = this.annotations.findIndex(a => a.id === annotation.id);
+    if (index !== -1) {
+      this.annotations.splice(index, 1);
+    }
   }
 
   closePopup(file?: File) {
@@ -68,6 +75,7 @@ export class DocumentViewerComponent implements OnInit {
 
     if (file) {
       const annotation = {
+        id: this.nextId++,
         x: this.positionBeforePopupClosed.x,
         y: this.positionBeforePopupClosed.y,
         text: file.name,

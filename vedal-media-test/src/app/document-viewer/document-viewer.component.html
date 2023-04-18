@@ -6,9 +6,12 @@
     <img src="assets/documents/{{ page }}.png" alt="Page {{ page }}" />
     <div class="page-number">Page {{ page }}</div>
     <div class="annotation" *ngFor="let annotation of annotations"
-         [style.left.px]="annotation.x" [style.top.px]="annotation.y">
-      {{ annotation.text }}
-    </div>
+     [style.left.px]="annotation.x" [style.top.px]="annotation.y"
+     draggable="true" (dragend)="onAnnotationDragEnd(annotation, $event)">
+	  {{ annotation.text }}
+	  <button (click)="removeAnnotation(annotation)">Delete</button>
+	</div>
+
   </div>
 </div>
 <div class="popup" *ngIf="isPopupOpen" [style.left.px]="position.x" [style.top.px]="position.y">
