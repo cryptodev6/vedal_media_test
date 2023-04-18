@@ -38,6 +38,13 @@ export class DocumentViewerComponent implements OnInit {
     this.isPicturePopupOpen = true;
   }
 
+  save() {
+    const jsonOutput = JSON.stringify(this.annotations);
+    console.log(jsonOutput);
+    // Navigate to the new page here
+  }
+
+
   showInscriptionPopup() {
     this.isPopupOpen = false;
     this.isInscriptionPopupOpen = true;
