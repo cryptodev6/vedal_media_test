@@ -16,18 +16,21 @@ export class DocumentViewerComponent implements OnInit {
   positionBeforePopupClosed: { x: number, y: number } = { x: 0, y: 0 };
   selectedImageFile: any;
   nextId = 1;
+  selectedAnnotation: any;
 
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {}
 
-  showPopup(event: MouseEvent) {
+  showPopup(event: MouseEvent, annotation: any) {
     this.position.x = event.clientX;
     this.position.y = event.clientY;
     this.isPopupOpen = true;
     this.isPicturePopupOpen = false;
     this.isInscriptionPopupOpen = false;
+    this.selectedAnnotation = annotation;
   }
+
 
   showPicturePopup() {
     this.positionBeforePopupClosed = { ...this.position };
@@ -64,6 +67,13 @@ export class DocumentViewerComponent implements OnInit {
   removeAnnotation(annotation: any) {
     const index = this.annotations.findIndex(a => a.id === annotation.id);
     if (index !== -1) {
+      // Check if the annotation being deleted is the same one that was last clicked to open the popup
+      if (annotation === this.selectedAnnotation) {
+        this.isPopupOpen = false;
+        this.isPicturePopupOpen = false;
+        this.isInscriptionPopupOpen = false;
+        this.selectedAnnotation = null;
+      }
       this.annotations.splice(index, 1);
     }
   }

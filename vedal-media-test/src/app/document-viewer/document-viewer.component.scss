@@ -149,15 +149,49 @@ button:hover {
     max-width: 100%;
   }
 }
+
 .annotation {
   position: absolute;
-  background-color: yellow;
-  padding: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #fff;
+  border: 2px solid #333;
+  padding: 4px;
+  cursor: move;
   & img {
     max-width: 100%;
     height: auto;
   }
 }
+
+.annotation .delete {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #f00;
+  border: none;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.delete-button {
+    position: relative;
+    top: 0px;
+    left: -112px;
+    width: 47px;
+    font-size: 10px;
+}
+.annotation .delete:hover {
+  background-color: #c00;
+}
+
 .popup {
   position: absolute;
   top: 0;

@@ -1,17 +1,16 @@
 <button id="plus-button" (click)="zoomIn()">+</button>
 <button id="negative-button" (click)="zoomOut()">-</button>
 <div class="title">Test Doc</div>
-<div class="container" (click)="showPopup($event)">
+<div class="container" (click)="showPopup($event, null)">
   <div class="page" *ngFor="let page of [1, 2, 3, 4, 5]">
     <img src="assets/documents/{{ page }}.png" alt="Page {{ page }}" />
     <div class="page-number">Page {{ page }}</div>
     <div class="annotation" *ngFor="let annotation of annotations"
-     [style.left.px]="annotation.x" [style.top.px]="annotation.y"
-     draggable="true" (dragend)="onAnnotationDragEnd(annotation, $event)">
-	  {{ annotation.text }}
-	  <button (click)="removeAnnotation(annotation)">Delete</button>
-	</div>
-
+         [style.left.px]="annotation.x" [style.top.px]="annotation.y"
+         draggable="true" (dragend)="onAnnotationDragEnd(annotation, $event)">
+      {{ annotation.text }}
+      <button class="delete" (click)="removeAnnotation(annotation)">X</button>
+    </div>
   </div>
 </div>
 <div class="popup" *ngIf="isPopupOpen" [style.left.px]="position.x" [style.top.px]="position.y">
@@ -35,4 +34,3 @@
   <input #annotationInput (keyup.enter)="addAnnotation(annotationInput.value)">
 </div>
 <img *ngIf="selectedImageFile" [src]="selectedImageFile" alt="Selected Image" width="300" height="300" style="background-color: yellow; padding: 10px;">
-
