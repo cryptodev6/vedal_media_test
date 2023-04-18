@@ -17,10 +17,16 @@ export class DocumentViewerComponent implements OnInit {
   selectedImageFile: any;
   nextId = 1;
   selectedAnnotation: any;
+  id: number = 0;
 
   constructor(private route: ActivatedRoute) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      this.id = params['id'];
+      console.log(this.id);
+    });
+  }
 
   showPopup(event: MouseEvent, annotation: any) {
     this.position.x = event.clientX;

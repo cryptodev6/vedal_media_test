@@ -3,8 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { DocumentViewerComponent } from './document-viewer/document-viewer.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'document-viewer', pathMatch: 'full' },
-  { path: 'document-viewer', component: DocumentViewerComponent }
+  { path: '', redirectTo: 'document-viewer/1', pathMatch: 'full' },
+  { path: 'document-viewer/:id', component: DocumentViewerComponent }
 ];
 
 @NgModule({
